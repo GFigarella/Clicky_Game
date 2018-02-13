@@ -29,22 +29,27 @@ class App extends React.Component {
   
   //function that adds a point if an image was clicked
   myGuess = id => {
-    if (this.state.clickedImg.indexOf(this.state.friends.id) == -1){
-      this.setState({ score: this.state.score + 1, myResult: "You guessed correctly!", clickedImg:[...this.state.clickedImg, this.state.friends.id]});
+    if (this.state.clickedImg.indexOf(id) == -1){
+      this.setState({ score: this.state.score + 1, myResult: "You guessed correctly!", clickedImg:[...this.state.clickedImg, id]});
     }
     else {
       this.setState({myResult: "You clicked that one already, you lost!"})
     } 
   }
 
-//set the starting values for when the page loads for the 1st time
-  componentDidMount () {
+  //reset function
+  myReset = () => {
     this.setState({
       friends,
       myResult: "Click and Image to begin",
       score: 0,
       topScore: this.state.topScore
     })
+  }
+
+  //set the starting values for when the page loads for the 1st time
+  componentDidMount () {
+    this.myReset();
   }
 
 
