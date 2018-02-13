@@ -11,9 +11,10 @@ class App extends React.Component {
   state = {
     // friends: friends, we can skip this syntax, since react knows that you're settings friends to friends if you just put it once.
     friends,
-    myResult: " ",
+    myResult: "Click and Image to begin",
     score: 0,
     topScore: 0,
+    tempScore: 0,
     clickedImg: []
   }
   //TODO: removeCard method
@@ -30,20 +31,24 @@ class App extends React.Component {
   //function that adds a point if an image was clicked
   myGuess = id => {
     if (this.state.clickedImg.indexOf(id) === -1){
-      this.setState({ score: this.state.score + 1, myResult: "You guessed correctly!", clickedImg:[...this.state.clickedImg, id]});
+      this.setState({ score: this.state.score + 1, tempScore: this.state.tempScore + 1, myResult: "You guessed correctly!", clickedImg:[...this.state.clickedImg, id]
+    });
     }
     else {
       this.setState({myResult: "You clicked that one already, you lost!"})
+      this.myReset();
     } 
   }
 
   //reset function
   myReset = () => {
+    this.shuffleArray(this.state.friends);
     this.setState({
       friends,
-      myResult: "Click and Image to begin",
       score: 0,
-      topScore: this.state.topScore
+      tempScore: 0,
+      topScore: this.state.topScore >= this.state.tempScore ? this.state.topScore : this.state.tempScore,
+      clickedImg: []
     })
   }
 
@@ -65,12 +70,14 @@ class App extends React.Component {
 
 
   render(){
-    const friend = this.shuffleArray(this.state.friends);
+    //call the shuffleArray function to randomize the images everytime one is clicked
+    this.shuffleArray(this.state.friends);
     //Return the element to the UI
     return ( 
       <div>
         <Navbar 
         score = {this.state.score}
+        topScore = {this.state.topScore}
         myGuess={this.myGuess}
         myResult={this.state.myResult}
         />
