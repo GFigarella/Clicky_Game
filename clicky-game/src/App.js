@@ -11,7 +11,9 @@ class App extends React.Component {
   state = {
     // friends: friends, we can skip this syntax, since react knows that you're settings friends to friends if you just put it once.
     friends,
-    score: 0
+    myResult: " ",
+    score: 0,
+    topScore: 0,
   }
   //TODO: removeCard method
   removeCard = id => {
@@ -22,7 +24,16 @@ class App extends React.Component {
 
   //function that adds a point if an image was clicked
   myGuess = id => {
-    this.setState({ score: this.state.score + 1 });
+    this.setState({ score: this.state.score + 1, myResult: "You guessed correctly!" });
+  }
+
+  componentDidMount () {
+    this.setState({
+      friends,
+      myResult: "Click and Image to begin",
+      score: 0,
+      topScore: this.state.topScore
+    })
   }
 
 
@@ -33,6 +44,7 @@ class App extends React.Component {
         <Navbar 
         score = {this.state.score}
         myGuess={this.myGuess}
+        myResult={this.state.myResult}
         />
         <Header/>
         <Wrapper>
