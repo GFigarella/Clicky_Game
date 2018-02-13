@@ -14,6 +14,7 @@ class App extends React.Component {
     myResult: " ",
     score: 0,
     topScore: 0,
+    clickedImg: []
   }
   //TODO: removeCard method
   removeCard = id => {
@@ -22,11 +23,21 @@ class App extends React.Component {
     this.setState({friends})
   }
 
+  // this.setState({
+  //   arrayvar: [...this.state.arrayvar, newelement]
+  // })
+  
   //function that adds a point if an image was clicked
   myGuess = id => {
-    this.setState({ score: this.state.score + 1, myResult: "You guessed correctly!" });
+    if (this.state.clickedImg.indexOf(this.state.friends.id) == -1){
+      this.setState({ score: this.state.score + 1, myResult: "You guessed correctly!", clickedImg:[...this.state.clickedImg, this.state.friends.id]});
+    }
+    else {
+      this.setState({myResult: "You clicked that one already, you lost!"})
+    } 
   }
 
+//set the starting values for when the page loads for the 1st time
   componentDidMount () {
     this.setState({
       friends,
@@ -55,11 +66,8 @@ class App extends React.Component {
             key={friend.id} //we need this line for the map function to know which element we're looping on
             removeCard={this.removeCard}
             myGuess={this.myGuess}
-            name={friend.name}
             id={friend.id}
             image={friend.image}
-            occupation={friend.occupation}
-            location={friend.location}
             />
           ))}
         </Wrapper>
