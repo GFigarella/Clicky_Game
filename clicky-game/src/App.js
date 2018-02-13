@@ -1,7 +1,8 @@
 import React from "react";
 import FriendCard from "./components/FriendCard";
 import Wrapper from "./components/Wrapper";
-import Navbar from "./components/Navbar"
+import Navbar from "./components/Navbar";
+import Header from "./components/Header";
 import friends from "./friends.json";
 import "./App.css";
 
@@ -31,6 +32,7 @@ class App extends React.Component {
     return ( 
       <div>
         <Navbar/>
+        <Header/>
         <Wrapper>
           {/* <h1 className="title">Friends List</h1> */}
           {this.state.friends.map(friend =>(

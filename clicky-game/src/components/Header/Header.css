@@ -1,0 +1,15 @@
+.myHeader {
+    background: black;
+    color: white;
+    padding: 100px 20px;
+    padding-bottom: 90px;
+    text-align: center;
+}
+
+#myTitle{
+    font-size: 50px;
+}
+
+span{
+    font-size: 24px;
+}

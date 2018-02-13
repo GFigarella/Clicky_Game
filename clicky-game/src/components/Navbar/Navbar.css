@@ -1,17 +1,17 @@
-.myNav li {
-    display: inline-block;
-    padding: 26px 0;
-    width: 33.3%;
-    text-align: center;
-}
-
 .myNav {
-    background: black;
+    background: #3250E5;
     color: white;
     z-index: 99;
     position: fixed;
     width: 100%;
     box-shadow: 0px 16px 20px rgba(0, 0, 0, 0.40);
-    margin-bottom: 15px;
     font-size: calc(10px + 14 * (100vw - 320px)/800);
+    white-space: nowrap;
+}
+
+.myNav li {
+    display: inline-block;
+    padding: 0px 0;
+    width: 33.3%;
+    text-align: center;
 }
