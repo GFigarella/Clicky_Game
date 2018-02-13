@@ -10,7 +10,8 @@ class App extends React.Component {
   //Set initial state to the array we imported
   state = {
     // friends: friends, we can skip this syntax, since react knows that you're settings friends to friends if you just put it once.
-    friends
+    friends,
+    score: 0
   }
   //TODO: removeCard method
   removeCard = id => {
@@ -21,9 +22,7 @@ class App extends React.Component {
 
   //function that adds a point if an image was clicked
   myGuess = id => {
-    //get all the friends whose ids are NOT equal to the friend whose red x was clicked
-    const guess = this.state.friends.filter(friend => friend.id !== id);
-    this.setState({friends})
+    this.setState({ score: this.state.score + 1 });
   }
 
 
@@ -31,7 +30,10 @@ class App extends React.Component {
     //Return the element to the UI
     return ( 
       <div>
-        <Navbar/>
+        <Navbar 
+        score = {this.state.score}
+        myGuess={this.myGuess}
+        />
         <Header/>
         <Wrapper>
           {/* <h1 className="title">Friends List</h1> */}
@@ -40,6 +42,7 @@ class App extends React.Component {
             className = "list-group-item"
             key={friend.id} //we need this line for the map function to know which element we're looping on
             removeCard={this.removeCard}
+            myGuess={this.myGuess}
             name={friend.name}
             id={friend.id}
             image={friend.image}
