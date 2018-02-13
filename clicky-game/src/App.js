@@ -29,7 +29,7 @@ class App extends React.Component {
   
   //function that adds a point if an image was clicked
   myGuess = id => {
-    if (this.state.clickedImg.indexOf(id) == -1){
+    if (this.state.clickedImg.indexOf(id) === -1){
       this.setState({ score: this.state.score + 1, myResult: "You guessed correctly!", clickedImg:[...this.state.clickedImg, id]});
     }
     else {
@@ -47,6 +47,17 @@ class App extends React.Component {
     })
   }
 
+  //function to randomize the friends object, to shuffle the display
+  shuffleArray = array => {
+    let i = array.length - 1;
+    for (; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+  }
+
   //set the starting values for when the page loads for the 1st time
   componentDidMount () {
     this.myReset();
@@ -54,6 +65,7 @@ class App extends React.Component {
 
 
   render(){
+    const friend = this.shuffleArray(this.state.friends);
     //Return the element to the UI
     return ( 
       <div>
